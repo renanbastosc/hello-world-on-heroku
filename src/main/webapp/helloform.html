@@ -9,18 +9,37 @@ and open the template in the editor.
         <title>Say Hello (usando o HelloServlet.java)</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
-        <div>Say Hello (usando o HelloServlet.java)</div>
-           <form action="alomundo" method="post">
-           <br>Idioma: <input type="radio" name="lang" value="pt" checked> Português
-           <input type="radio" name="lang" value="en"> English
-           <input type="radio" name="lang" value="fr"> Français
-           <input type="radio" name="lang" value="de"> Deutsch
-           <input type="radio" name="lang" value="fr"> Italiano
-           <input type="radio" name="lang" value="zh"> 中國人<br><br>
-           Nome: <input type="text" name="nome"/><br><br>
-           <input type="submit" value="Cumprimentar"/>
-        </form>
+        <div class="form">
+            <h3>Greetings - using HelloServlet.java)</h3>
+            <form action="alomundo" method="post">
+                <div class="fieldset">
+                    <span>
+                        <label>What's your Language?</label>
+                        <select>
+                            <option name="lang" value="pt" selected="selected"> Português</option>
+                            <option name="lang" value="en"> English </option>
+                            <option name="lang" value="fr"> Français </option>
+                            <option name="lang" value="de"> Deutsch </option>
+                            <option name="lang" value="it"> Italiano </option>
+                            <option name="lang" value="zh"> 中國人 </option>
+                        </select>
+                     </span>
+                     <span>
+                         <label>Nome:</label>
+                         <input type="text" name="nome"/>
+                     </span>
+                     <span>
+                         <label>Senhor ou Senhora?</label>
+                         <input type="radio" name="pronoun" value="" checked> Nenhuma
+                         <input type="radio" name="pronoun" value="Sr." checked> Sr.
+                         <input type="radio" name="pronoun" value="Sra." checked> Sra.
+                     </span>
+                </div>
+                <input type="submit" value="Cumprimentar"/>
+            </form>
+        </div>
     </body>
 </html>

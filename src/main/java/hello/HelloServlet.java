@@ -126,6 +126,7 @@ public class HelloServlet extends HttpServlet {
             throws ServletException, IOException {
         String msg = "";        
         String lang = request.getParameter("lang");
+        String pronoun = request.getParameter("pronoun");
         Salutes salute = checkSaluteByTime();
         String saluteMsg = getTranslatedSalute(lang, salute);
 
@@ -157,7 +158,7 @@ public class HelloServlet extends HttpServlet {
         if(nome==null)
             nome = "Fulano";
         
-        msg = msg + nome + ". " + saluteMsg + "!";
+        msg = msg + pronoun + nome + ". " + saluteMsg + "!";
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
