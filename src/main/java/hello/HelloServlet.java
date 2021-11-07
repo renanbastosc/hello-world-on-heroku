@@ -8,6 +8,7 @@ package hello;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -132,22 +133,22 @@ public class HelloServlet extends HttpServlet {
             lang = "pt";
         switch (lang) {
             case "pt":
-                msg = saluteMsg + ". Alô, ";
+                msg = "Olá, ";
                 break;
             case "en":
-                msg = saluteMsg + ".Hello, ";
+                msg = "Hello, ";
                 break;
             case "fr":
-                msg = saluteMsg + "Bonjour, ";
+                msg = "Bonjour, ";
                 break;
             case "de":
-                msg = saluteMsg + "Hallo, ";
+                msg = "Hallo, ";
                 break;
             case "it":
-                msg = saluteMsg + "Ciao, ";
+                msg = "Ciao, ";
                 break;
             case "zh":
-                msg = saluteMsg + "你好, ";
+                msg = "你好, ";
                 break;
         }
         
@@ -156,7 +157,7 @@ public class HelloServlet extends HttpServlet {
         if(nome==null)
             nome = "Fulano";
         
-        msg = msg + nome+"!";
+        msg = msg + nome + ". " + saluteMsg + "!";
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -185,7 +186,7 @@ public class HelloServlet extends HttpServlet {
     }// </editor-fold>
 
     private Salutes checkSaluteByTime() {
-        Calendar c = Calendar.getInstance();
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("America/Sao_Paulo"));
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
         if (timeOfDay >= 6 && timeOfDay < 12) 
