@@ -7,6 +7,8 @@ package hello;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -62,26 +64,37 @@ public class HelloServlet extends HttpServlet {
         String msg = "";
         
         String lang = request.getParameter("lang");
-        if(lang==null)
+        if (lang == null)
             lang = "pt";
-        switch(lang){
+        switch (lang) {
             case "pt":
-                msg = "Alô, ";
+                msg = "Alô";
                 break;
             case "en":
-                msg = "Hello, ";
+                msg = "Hello";
+                break;
+            case "de":
+                msg = "Hallo";
                 break;
             case "fr":
-                msg = "Bonjour, ";
+                msg = "Bonjour";
                 break;
+            case "it":
+                msg = "Ciao, ";
+                break;
+            case "zh":
+                msg = "你好, ";
+                break;
+            default: 
+                msg = "";
         }
         
         String nome = request.getParameter("nome");
 
-        if(nome==null)
+        if (nome == null)
             nome = "Fulano";
         
-        msg = msg+nome+"!";
+        msg = msg + nome + "!";
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -110,23 +123,31 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String msg = "";
-        
+        String msg = "";        
         String lang = request.getParameter("lang");
-        if(lang==null)
+        Salutes salute = checkSaluteByTime();
+        String saluteMsg = getTranslatedSalute(lang, salute);
+
+        if (lang==null)
             lang = "pt";
-        switch(lang){
+        switch (lang) {
             case "pt":
-                msg = "Alô, ";
+                msg = saluteMsg + ". Alô, ";
                 break;
             case "en":
-                msg = "Hello, ";
+                msg = saluteMsg + ".Hello, ";
                 break;
             case "fr":
-                msg = "Bonjour, ";
+                msg = saluteMsg + "Bonjour, ";
                 break;
             case "de":
-                msg = "Hallo, ";
+                msg = saluteMsg + "Hallo, ";
+                break;
+            case "it":
+                msg = saluteMsg + "Ciao, ";
+                break;
+            case "zh":
+                msg = saluteMsg + "你好, ";
                 break;
         }
         
@@ -135,7 +156,7 @@ public class HelloServlet extends HttpServlet {
         if(nome==null)
             nome = "Fulano";
         
-        msg = msg+nome+"!";
+        msg = msg + nome+"!";
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -163,4 +184,99 @@ public class HelloServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private Salutes checkSaluteByTime() {
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+
+        if (timeOfDay >= 6 && timeOfDay < 12) 
+        {
+            return Salutes.Morning;
+        } 
+        else if (timeOfDay >= 12 && timeOfDay < 18) 
+        {
+            return Salutes.Afternoon;
+        } 
+        else 
+        {
+            return Salutes.Night;
+        }
+    }
+    
+    private enum Salutes {
+        Morning, Afternoon, Night;
+    }
+
+    private String getTranslatedSalute (String lang, Salutes salute)
+    {
+        String msg = "";
+        if (salute.equals(Salutes.Morning)) 
+        {
+            switch (lang) {
+                case "pt":
+                    msg = "Bom dia";
+                    break;
+                case "en":
+                    msg = "Good morning";
+                    break;
+                case "fr":
+                    msg = "Bonjour";
+                    break;
+                case "de":
+                    msg = "Guten morgen";
+                    break;
+                case "it":
+                    msg = "Buon giorno";
+                    break;
+                case "zh":
+                    msg = "早上好";
+                    break;
+            }
+        }
+        else if (salute.equals(Salutes.Afternoon))
+        {
+            switch (lang) {
+                case "pt":
+                    msg = "Boa tarde";
+                    break;
+                case "en":
+                    msg = "Good afternoon";
+                    break;
+                case "fr":
+                    msg = "Bon après-midi";
+                    break;
+                case "de":
+                    msg = "Guten tag";
+                    break;
+                case "it":
+                    msg = "Buon pomeriggio";
+                    break;
+                case "zh":
+                    msg = "下午好";
+                    break;
+            }
+        }
+        else {
+            switch (lang) {
+                case "pt":
+                    msg = "Boa noite";
+                    break;
+                case "en":
+                    msg = "Good evening";
+                    break;
+                case "fr":
+                    msg = "Bonne nuit";
+                    break;
+                case "de":
+                    msg = "Gute nacht";
+                    break;
+                case "it":
+                    msg = "Buona notte";
+                    break;
+                case "zh":
+                    msg = "晚安";
+                    break;
+            }
+        }
+        return msg;
+    }
 }
