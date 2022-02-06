@@ -65,7 +65,7 @@ public class HelloServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet HelloServlet</h1>");
             out.println("<p>" + msg + "</p>");
-            out.println("<p><a href='/hello-world'>voltar</a></p>");
+            out.println("<p><a href='javascript:history.back();' >voltar</a></p>");
             out.println("</body>");
             out.println("</html>");
         }
