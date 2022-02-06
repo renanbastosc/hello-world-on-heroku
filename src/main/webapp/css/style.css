@@ -10,6 +10,7 @@ span {
   min-width:250px;
   margin: 20px auto;
   position: relative;
+  padding: 15px;
 }
 
 .fieldset {
