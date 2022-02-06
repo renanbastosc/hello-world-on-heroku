@@ -16,27 +16,27 @@ and open the template in the editor.
             <h3>Greetings - using HelloServlet.java)</h3>
             <form action="alomundo" method="post">
                 <div class="fieldset">
-                    <span>
+                    <p>
                         <label>What's your Language?</label>
-                        <select>
-                            <option name="lang" value="pt" selected="selected"> Português</option>
-                            <option name="lang" value="en"> English </option>
-                            <option name="lang" value="fr"> Français </option>
-                            <option name="lang" value="de"> Deutsch </option>
-                            <option name="lang" value="it"> Italiano </option>
-                            <option name="lang" value="zh"> 中國人 </option>
+                        <select name="lang">
+                            <option value="pt" selected="selected"> Português</option>
+                            <option value="en"> English </option>
+                            <option value="fr"> Français </option>
+                            <option value="de"> Deutsch </option>
+                            <option value="it"> Italiano </option>
+                            <option value="zh"> 中國人 </option>
                         </select>
-                     </span>
-                     <span>
-                         <label>Nome:</label>
-                         <input type="text" name="nome"/>
-                     </span>
-                     <!-- <span>
-                         <label>Senhor ou Senhora?</label>
-                         <input type="radio" name="pronoun" value="" checked> Nenhuma
-                         <input type="radio" name="pronoun" value="Sr." checked> Sr.
-                         <input type="radio" name="pronoun" value="Sra." checked> Sra.
-                     </span> -->
+                    </p>
+                    <p>
+                        <label>Nome:</label>
+                        <input type="text" name="name"/>
+                    </p>
+                    <p>
+                        <label>Senhor ou Senhora?</label>
+                        <input type="radio" name="pronoun" value="" checked> Nenhuma
+                        <input type="radio" name="pronoun" value="Sr."> Sr.
+                        <input type="radio" name="pronoun" value="Sra."> Sra.
+                    </p>
                 </div>
                 <input type="submit" value="Cumprimentar"/>
             </form>
